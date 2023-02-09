@@ -319,10 +319,6 @@ last_msec = msec; //Store 'now' for next time
     //Serial.println(Biestable1);
     //Serial.print("Valor Carga :");
     //Serial.println(load_status);
-    unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis;
-    // Enviar parámetros por el puerto serie
     Serial.println("Enviando datos");
     Serial.print("Voltage Bateria :");
     Serial.println(bat_volt);   
