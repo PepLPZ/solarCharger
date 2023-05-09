@@ -21,7 +21,7 @@
   // D5 - Battery Red LED       
   // D6 - Battery Green LED 
   // D7 - Battery Blue LED 
-  // D8 - Load Red Led 
+  // D8 - Load Orange Led 
   // D9 - Load Green Led  
   // D10- Solar Red LED
   // D11- Solar Green LED  
@@ -104,7 +104,7 @@ pinMode(SOL_GREEN_LED,OUTPUT);
 pinMode(BAT_RED_LED,OUTPUT);
 pinMode(BAT_GREEN_LED,OUTPUT);
 pinMode(BAT_BLUE_LED,OUTPUT);
-pinMode(LOAD_RED_ORANGE ,OUTPUT);
+pinMode(LOAD_ORANGE_LED ,OUTPUT);
 pinMode(LOAD_GREEN_LED,OUTPUT);
 pinMode(PWM_PIN,OUTPUT);
 pinMode(LOAD_PIN,OUTPUT);   //<<<<< SALIDA DE CARGA
@@ -405,13 +405,13 @@ void battery_led(void)
  {
     if(load_status==1)
     {
-      digitalWrite(LOAD_RED_ORANGE, LOW);
+      digitalWrite(LOAD_ORANGE_LED, LOW);
       digitalWrite(LOAD_GREEN_LED,HIGH);
     }
     else if(load_status==0)
     {
       digitalWrite(LOAD_GREEN_LED, LOW);
-      digitalWrite(LOAD_RED_ORANGE,HIGH);
+      digitalWrite(LOAD_ORANGE_LED,HIGH);
     }
 }
 //////////////////////// TURN OFF ALL THE battery LEDs ////////////////
