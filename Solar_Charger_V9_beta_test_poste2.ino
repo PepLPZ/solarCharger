@@ -47,7 +47,7 @@
 #define BAT_RED_LED 5
 #define BAT_GREEN_LED 6
 #define BAT_BLUE_LED 7
-#define LOAD_RED_ORANGE 8
+#define LOAD_ORANGE_LED 8
 #define LOAD_GREEN_LED 9
 #define SOL_RED_LED 10
 #define SOL_GREEN_LED 11
@@ -111,8 +111,6 @@ pinMode(LOAD_PIN,OUTPUT);   //<<<<< SALIDA DE CARGA
 pinMode(LOAD_SWITCH,INPUT); // Define pinD4 input to control the load ON/OFF <<<<< PULSADOR CARGA
 digitalWrite(PWM_PIN,LOW);  // default value of pwm duty cycle
 digitalWrite(LOAD_PIN,HIGH);  // default load state is ON CADA VEZ QUE ARRANCAMOS
-//digitalWrite (LOAD_RED_ORANGE,LOW);
-//digitalWrite(LOAD_GREEN_LED,HIGH);// default load led state is ON CADA VEZ QUE ARRANCAMOS
 }
 void loop()
 {
