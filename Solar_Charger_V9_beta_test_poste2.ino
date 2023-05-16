@@ -1,4 +1,4 @@
-////////////////PWM SOLAR CHARGE CONTROLLER V-10.1 POSTE 3/////
+  ////////////////PWM SOLAR CHARGE CONTROLLER V-10.1 POSTE 3/////
   //-----------------------------------------------------------------------------
   //
   //  Author: JOSEP LOPEZ SANCHEZ
@@ -94,6 +94,7 @@ float solar_ampSecs = 0;
 float solar_ampHours=0;
 bool estadoCarga = true;  // Variable global para el estado de carga, inicializada a true (carga activada)
 int estadoAmpli = 0;      // Variable global para el estado de carga, inicializada a 0 (Ampli apagado)
+int estadoAnterior = 0;  // Variable para almacenar el estado anterior del amplificador
 float low_Bat=0;          // Variable para almacenar si se ha disparado el fail_safe por low voltage de la bateria
 OneWire oneWire(ONE_WIRE_BUS); // Setup a oneWire instance to communicate with any OneWire devices
 DallasTemperature sensors(&oneWire); // Pass our oneWire reference to Dallas Temperature sensor 
@@ -181,21 +182,23 @@ void load_Push(void)
 /////////////////////////////////////AMPLI STATUS DETECTOR ON/OFF ///////////////////////// 
 void Ampli_Push(void)
 {
-  if (digitalRead(AMPLI_PIN) == HIGH) // Ampli ON
+  if (digitalRead(AMPLI_PIN) == HIGH)  // Ampli ON
   {
-    // Poner a ON la variable si esta apagada
-    if (estadoAmpli == 0)
+    if (estadoAmpli != 1)// Si el estado actual es diferente al estado anterior, actualiza el estadoAmpli
     {
-      estadoAmpli = 1; // Cambiar estado de la variable
+      estadoAmpli = 1;  // Cambiar estado de la variable a encendido
     }
-    // Poner a off la variable si esta encendida
-    else if (estadoAmpli == 1)
-    {
-      estadoAmpli = 0; // Cambiar estado de carga
-    }
-    delay(10); // Esperar un corto tiempo para evitar rebotes en el pulsador
   }
+  else  // Ampli OFF
+  {
+      if (estadoAmpli != 0) // Si el estado actual es diferente al estado anterior, actualiza el estadoAmpli
+    {
+      estadoAmpli = 0;  // Cambiar estado de la variable a apagado
+    }
+  }
+      estadoAnterior = digitalRead(AMPLI_PIN);  // Actualizar el estado anterior del amplificador
 }
+
 ////////////////////////////////////OBTENER LECTURAS DE SENSADO/////////////////////////////////////////
  void read_data(void) 
  {
